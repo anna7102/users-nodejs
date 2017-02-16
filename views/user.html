@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"/>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">Utilisateurs</span>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/users">Accueil</a></li>
+                <li><a href="/nouveau">Nouveau utilisateur</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="text-center">
+        <h1>Utilisateurs</h1>
+        <p class="lead">Voici la liste des utilisateurs. </p>
+    </div>
+    <div>
+        <div class="container">
+
+        </div>
+        <br />
+        <div class="container">
+            <div class="col-md-6 column list-group">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <table class=" table table-striped">
+
+                        <tr><th><em>Utilisateur </em></th>
+                            <th><strong>Email :</strong></th>
+                        </tr>
+                        <tr>
+                            <td> <strong>{{ user.nom }}</strong></td>
+                            <td> <div> {{ user.email }}</div></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><!-- /.container -->
+</body>
+</html>

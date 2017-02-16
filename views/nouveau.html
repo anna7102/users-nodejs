@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"/>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" >Utilisateurs</span>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/users">Accueil</a></li>
+                <li><a href="/nouveau">Nouveau utilisateur</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="text-center">
+        <h1>Nouveau utilisateur</h1>
+        <p class="lead">Utiliser ce formulaire afin de créer un nouveau utilisateur </p>
+    </div>
+
+    {% if message.length > 0 %}
+    <div class="alert alert-danger alert-error">
+        {{ message }}
+    </div>
+    {% endif %}
+
+    <form class="form-horizontal" action="/nouveau" method="post">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Nouveau utilisateur</legend>
+
+            <!-- User Name -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="nom">Nom</label>
+                <div class="col-md-4">
+                <input type="text" id="nom" name="nom" class="form-control">
+                </div>
+            </div>
+
+
+            <!-- User Email -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="nom">Email</label>
+                <div class="col-md-4">
+                <input type="email" id="email" name="email" class="form-control">
+                </div>
+            </div>
+
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnSaveUser">Enregistrer</label>
+                <div class="col-md-4">
+                    <button id="btnSaveUser" name="btnSaveUser" class="btn btn-primary" type="submit">Enregistrer</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</div><!-- /.container -->
+</body>
+</html>

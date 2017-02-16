@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" >Utilisateurs</span>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/users">Accueil</a></li>
+                <li><a href="/nouveau">Nouveau utilisateur</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="text-center">
+        <h1>Modifier utilisateur</h1>
+        <p class="lead">Utiliser ce formulaire afin de modifer un utilisateur </p>
+    </div>
+
+    {% if message.length > 0 %}
+    <div class="alert alert-danger alert-error">
+        {{ message }}
+    </div>
+    {% endif %}
+
+    {% if user %}
+    <script>
+        var userId = "{{user.id}}";
+    </script>
+
+    <form class="form-horizontal" method="put">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Modfier utilisateur</legend>
+
+
+            <!-- User Name -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="nom">Nom</label>
+                <div class="col-md-4">
+                    <input type="text" id="nom" name="nom" class="form-control" value="{{user.nom}}">
+                </div>
+            </div>
+
+
+            <!-- User Email -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input type="email" id="email" name="email" class="form-control" value="{{user.email}}">
+                </div>
+            </div>
+
+            <input id="hiddenUserId" type="hidden" name="hiddenUserId" value="{{user.id}}">
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnSaveUser">Enregistrer</label>
+                <div class="col-md-4">
+                    <button id="btnSaveUser"  class="btn btn-primary" >Modifier</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+    {% else %}
+    <h1>Error - no user id</h1>
+    {% endif %}
+
+
+</div><!-- /.container -->
+<script>
+    $(document).ready(function () {
+
+        $("#btnSaveUser").click(function (e) {
+
+            e.preventDefault();
+
+            if ($('#nom').val().length === 0 || $('#email').val().length === 0) {
+                alert('champ nom email ne peut pas etre vide!');
+                return false;
+            } else {
+
+                var user = {};
+                user.id = $('#hiddenUserId').val();
+                //user.id = userId;
+                user.nom = $('#nom').val();
+                user.email = $('#email').val();
+
+                console.log('FROM MODIFY');
+                console.log(user);
+
+
+                var url = "http://localhost:3000/users/edition/" + user.id;
+                $.ajax({
+                    url: url,
+                    type: 'PUT',
+                    dataType: "json",
+                    data: user,
+                    headers: {"X-HTTP-Method-Override": "PUT"},
+                    success: function (data, textStatus, xhr) {
+                        console.log('OK');
+                        console.log(xhr.status);
+                        if(xhr.status === 204) {
+                            window.location.href = "http://localhost:3000/users";
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                    }
+                })
+            }
+        });
+
+    });
+
+</script>
+</body>
+</html>
